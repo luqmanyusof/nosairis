@@ -1,0 +1,44 @@
+<!-- ping_data_display.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ping Data Display</title>
+</head>
+<body>
+
+<h1>Ping Data</h1>
+
+<!-- {% for ping_data in ping_data_list %}
+    <p>Switch Label: {{ ping_data.switch_label }}, T1: {{ ping_data.t1 }}, Ping Time: {{ ping_data.ping_time }}</p>
+{% endfor %} -->
+
+<table border="1">
+    <thead>
+        <th>Switch Label</th>
+        <th>T1</th>
+        <th>T2</th>
+        <th>T3</th>
+        <th>T4</th>
+        <th>T5</th>
+        <th>Ping Status</th>
+        <th>Ping Time</th>
+    </thead>
+    <tbody>
+        {% for ping_data in ping_data_list %}
+        <tr>
+            <td>{{ ping_data.switch_label }}</td>
+            <td>{{ ping_data.t1 }}</td>
+            <td>{{ ping_data.t2 }}</td>
+            <td>{{ ping_data.t3 }}</td>
+            <td>{{ ping_data.t4 }}</td>
+            <td>{{ ping_data.t5 }}</td>
+            <td>{{ ping_data.ping_status }}</td>
+            <td>{{ ping_data.ping_time }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>
