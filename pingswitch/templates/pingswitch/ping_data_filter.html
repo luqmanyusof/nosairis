@@ -1,10 +1,13 @@
+
+
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Lisiting</title>
+    <title>Ping Status by Switch</title>
     <style>
         body {
             margin-top: 5vh;
@@ -42,7 +45,14 @@
 
 <body>
 
-    <h1>All Data Listing</h1>
+    <h1>Ping Status by Switch</h1>
+
+    <form method="get" action="filter">
+        {{ form.as_p }}
+        <button type="submit">Filter</button>
+    </form>
+
+    <br> 
 
     <table>
         <thead>
@@ -57,7 +67,7 @@
             <th>Ping Time</th>
         </thead>
         <tbody>
-            {% for ping_data in ping_data_list %}
+            {% for ping_data in ping_data_filter %}
             <tr>
                 <td>{{ forloop.counter }}</td>
                 <td>{{ ping_data.switch_label }}</td>
@@ -76,3 +86,5 @@
 </body>
 
 </html>
+
+  

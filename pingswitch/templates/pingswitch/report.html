@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Lisiting</title>
+    <title>Alert Report</title>
     <style>
         body {
             margin-top: 5vh;
@@ -39,40 +38,26 @@
         }
     </style>
 </head>
-
 <body>
-
-    <h1>All Data Listing</h1>
+    <h1>Alert Report</h1>
 
     <table>
         <thead>
             <th>No.</th>
             <th>Switch Label</th>
-            <th>T1</th>
-            <th>T2</th>
-            <th>T3</th>
-            <th>T4</th>
-            <th>T5</th>
-            <th>Ping Status</th>
-            <th>Ping Time</th>
+            <th>Alert Type</th>
+            <th>Alert Date/Time</th>
         </thead>
         <tbody>
-            {% for ping_data in ping_data_list %}
+            {% for ping_data in ping_data_filter %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td>{{ ping_data.switch_label }}</td>
-                <td>{{ ping_data.t1 }}</td>
-                <td>{{ ping_data.t2 }}</td>
-                <td>{{ ping_data.t3 }}</td>
-                <td>{{ ping_data.t4 }}</td>
-                <td>{{ ping_data.t5 }}</td>
-                <td>{{ ping_data.ping_status }}</td>
+                <td>SW-{{ ping_data.switch_label }}</td>
+                <td>Ping Lost</td>
                 <td>{{ ping_data.ping_time|date:"d/m/Y h:i A" }}</td>
             </tr>
             {% endfor %}
         </tbody>
-    </table>
-
+    </table>    
 </body>
-
 </html>

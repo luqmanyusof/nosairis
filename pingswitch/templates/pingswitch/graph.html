@@ -1,0 +1,114 @@
+<html>
+<head>
+    <style>
+        body {
+            margin-top: 5vh;
+            margin-left: 5vw;
+            margin-right: 5vw;
+            font-family: Arial, sans-serif;
+        }
+
+        .chart-canvas {
+            height: 200px; /* Set the desired height */
+        }
+
+        .chart-cont {
+            width: 80%;
+            margin: 5%;
+            padding: 5%;
+            border-style: solid;
+            border-width: 1px;
+            border-color: silver;
+        }
+    </style>
+    <title>Ping Availability Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
+</head>
+<body>
+    <h1> Ping Availability Chart</h1>
+
+    <div class="chart-cont">
+        <h3 >SW-S1 Ping Availability</h3>
+        <canvas id="chart1" class="chart-canvas"></canvas>
+    </div>
+    <div class="chart-cont">
+        <h3>SW-S2 Ping Availability</h3>
+        <canvas id="chart2" class="chart-canvas"></canvas>
+    </div>
+    <div class="chart-cont">
+        <h3>SW-S3 Ping Availability</h3>
+        <canvas id="chart3" class="chart-canvas"></canvas>
+    </div>
+   
+    <script>
+    function createChart(id, times, statuses) {
+        var ctx = document.getElementById(id).getContext('2d');
+        return new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: times,
+                datasets: [{
+                    data: statuses,
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.5
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                // aspectRatio: 2,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time',
+                            font: {
+                                size: 20, 
+                                weight: 'bold'
+                            }
+                        },
+                        type: 'time',
+                        ticks: {
+                            callback: function(value, index, values) {
+                                if (index === 0 || index === values.length - 1) {
+                                    return new Date(value).toLocaleString();
+                                } else {
+                                    return new Date(value).toLocaleTimeString();
+                                }
+                            }
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Status',
+                            font: {
+                                size: 20,
+                                weight: 'bold'
+                            }
+                        },
+                        min: 0,
+                        max: 1,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            },
+        });
+    }
+
+    createChart('chart1', {{ s1_times|safe }}, {{ s1_statuses|safe }});
+    createChart('chart2', {{ s2_times|safe }}, {{ s2_statuses|safe }});
+    createChart('chart3', {{ s3_times|safe }}, {{ s3_statuses|safe }});
+    </script>
+
+</body>
+</html>
